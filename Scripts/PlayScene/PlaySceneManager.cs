@@ -19,24 +19,20 @@ public class PlaySceneManager : MonoBehaviour
         MAX
     }
 
+    const int TARGET_MAX_NUM = 10;
+
     // 変数--------------------------------
     // 各ターゲット
-    [SerializeField]
-    GameObject[] targets;
+    [SerializeField] GameObject[] targets = new GameObject[TARGET_MAX_NUM];
 
     // シーン遷移時の演出
-    [SerializeField]
-    GameObject fader;
-
-    // ターゲットの数
-    [SerializeField]
-    int targetNum;
-
-    // ターゲットのHit判定
-    bool[] targetHit;
+    [SerializeField] GameObject fader;
 
     // 現在の状態
     eSTATE state;
+
+    // クリア判定
+    bool clear;
 
     // Start is called before the first frame update
     void Start()
@@ -47,11 +43,8 @@ public class PlaySceneManager : MonoBehaviour
         // 演出用オブジェクトを表示する
         fader.gameObject.SetActive(true);
 
-        // フラグの初期化
-        for (int i = 0; i < targetNum; i++)
-        {
-            targetHit[i] = false;
-        }
+        // 未クリア状態
+        clear = false;
     }
 
     // Update is called once per frame
@@ -79,7 +72,8 @@ public class PlaySceneManager : MonoBehaviour
 
     void Play()
     {
-
+        // ターゲットが全滅しているか確認し、全滅しているならクリアフラグを立てる
+        if (TargetCheck()) clear = true;
     }
 
     void Result()
@@ -93,5 +87,18 @@ public class PlaySceneManager : MonoBehaviour
         {
 
         }
+    }
+
+    bool TargetCheck()
+    {
+        // ターゲットが生存しているか判定
+        for (int i = 0; i < targets.Length; i++)
+        {
+            // ターゲットが一つでも生存している場合、falseを返す
+            if (targets[i] != null) return false;
+        }
+
+        // ターゲットが全滅している場合、trueを返す
+        return true;
     }
 }

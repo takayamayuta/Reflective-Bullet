@@ -7,12 +7,11 @@ public class Target : MonoBehaviour
     // 定数--------------------------------
 
     // 変数--------------------------------
-    bool hit;           // 当たったか判定
 
     // Start is called before the first frame update
     void Start()
     {
-        hit = false;
+
     }
 
     // Update is called once per frame
@@ -21,18 +20,12 @@ public class Target : MonoBehaviour
         
     }
 
-    // Hitフラグを渡す
-    public bool GetHit()
-    {
-        return hit;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // 弾と当たったらフラグを立てる
         if (collision.transform.tag == "Bullet")
         {
-            hit = true;
+            Destroy(gameObject);
         }
     }
 }

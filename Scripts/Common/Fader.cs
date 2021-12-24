@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class Fader : MonoBehaviour
 {
-    // 定数
+    // 定数--------------------------------
     const float SPEED = 0.01f;          // 透明度が変わる速さ
     const float TRANSPARENT = 0.0f;     // 透明時の値
     const float OPACITY = 1.0f;         // 不透明時の値
 
-    // 変数
+    // 変数--------------------------------
     Image image;
     float speed;    // 透明度を変える速度
 

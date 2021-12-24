@@ -24,6 +24,10 @@ public class Bullet : MonoBehaviour
         // タイマーの計測
         aliveTimer += Time.deltaTime;
         // 画面外にいった、または一定時間経過したら自身を破壊する
-        if (!renderer.isVisible || aliveTimer >= ALIVE_TIME) Destroy(gameObject);
+        //if (!renderer.isVisible || aliveTimer >= ALIVE_TIME) Destroy(gameObject);
+        if (!renderer.isVisible)
+        {
+            Destroy(gameObject);
+        }
     }
 }
