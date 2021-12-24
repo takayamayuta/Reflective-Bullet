@@ -19,19 +19,21 @@ public class PlaySceneManager : MonoBehaviour
         MAX
     }
 
-    const int TARGET_MAX_NUM = 10;
-
     // 変数--------------------------------
     // 各ターゲット
     [SerializeField]
-    GameObject[] targets = new GameObject[TARGET_MAX_NUM];
+    GameObject[] targets;
 
     // シーン遷移時の演出
     [SerializeField]
     GameObject fader;
 
+    // ターゲットの数
+    [SerializeField]
+    int targetNum;
+
     // ターゲットのHit判定
-    bool[] targetHit = new bool[TARGET_MAX_NUM];
+    bool[] targetHit;
 
     // 現在の状態
     eSTATE state;
@@ -39,15 +41,17 @@ public class PlaySceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 状態の設定
+        state = eSTATE.FADE_IN;
+
+        // 演出用オブジェクトを表示する
+        fader.gameObject.SetActive(true);
+
         // フラグの初期化
-        for (int i = 0; i < TARGET_MAX_NUM; i++)
+        for (int i = 0; i < targetNum; i++)
         {
             targetHit[i] = false;
         }
-
-        state = eSTATE.FADE_IN;
-        // 演出用オブジェクトを表示する
-        fader.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

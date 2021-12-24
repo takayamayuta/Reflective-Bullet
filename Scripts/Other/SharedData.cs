@@ -22,7 +22,7 @@ public class SharedData : MonoBehaviour
     void Start()
     {
         // チュートリアル
-        targetData[0].pos
+        targetData[0].pos[0] = new Vector3(0, 0, 0);
     }
 
 }
